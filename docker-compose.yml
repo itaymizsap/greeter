@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  #============
+  # GREETER
+  #============
+  greeter:
+    build:
+      context: ./greeter
+      dockerfile: Dockerfile
+    container_name: greeter
+    hostname: greeter
+    environment:
+      serverPort: '8070'
+      dayTimeHost: 'day-time-resolver'
+#      dayTimeHost: host.docker.internal
+      dayTimePort: '9070'
+    ports:
+      - 8070:8070
+  #================
+  # DayTimeResolver
+  #================
+  day-time-resolver:
+    build:
+      context: ./day-time-resolver
+      dockerfile: Dockerfile
+    container_name: day-time-resolver
+    hostname: day-time-resolver
+    environment:
+      serverPort: '9070'
+networks:
+  default:
+    name: greeter-network
+  greeter-network:
+    driver: bridge
+    name: greeter-network

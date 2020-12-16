@@ -1,0 +1,78 @@
+plugins {
+    id 'maven-publish'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'org.example'
+version = '1.0.0-SNAPSHOT'
+description = 'greeter'
+sourceCompatibility = '1.8'
+
+application {
+    mainClassName = 'org.example.greeter.GreeterApplication'
+    applicationDefaultJvmArgs = ['-Dserver.port=8080','-Ddaytime.service.endpoint=http://localhost:8081']
+}
+
+repositories {
+    mavenCentral()
+//    maven { url 'https://artifactory.imperva.com/repo' }
+}
+
+configurations {
+    javaAgent // creation of configuration name (like to 'compileJava', 'testRuntime', etc)
+}
+
+// configure copySpec of 'javaAgent' type configuration into installDist sub folder 'java-agents'
+installDist {
+    from(configurations.getByName('javaAgent')) {
+        into('java-agents')
+    }
+}.finalizedBy('jacocoAgentOptionDockerfileENV').dependsOn('test')
+
+task jacocoAgentOptionDockerfileENV(type: DefaultTask) {
+    doLast {
+        def file = project.file('Dockerfile_WithJacocoAgent')
+        file.write(project.file('Dockerfile').text)
+        def javaOption = '-javaagent:java-agents/org.jacoco.agent-0.8.6-runtime.jar' +
+                '=destfile=/jacoco/jacoco.exec,includes=*,append=true,output=file'
+        file.append('ENV JAVA_TOOL_OPTIONS=' + javaOption)
+    }
+
+    group 'verification'
+}
+
+// COPY jacoco.exec dump out-to ${projectDir}/jacoco/unit-tests/jacoco.exec
+test {
+    doLast {
+        println 'Hello World'
+        def bytes = project.file(buildDir.path + '/jacoco/test.exec').bytes
+        project.mkdir('jacoco/unit-tests')
+        def file = project.file('jacoco/unit-tests/jacoco.exec')
+        file.createNewFile()
+        file.append(bytes)
+    }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.google.code.gson:gson:2.8.5'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE'
+    testImplementation 'junit:junit:4.12'
+
+    javaAgent 'org.jacoco:org.jacoco.agent:0.8.6:runtime'
+    javaAgent 'org.jacoco:org.jacoco.cli:0.8.6:nodeps'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
