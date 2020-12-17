@@ -47,7 +47,7 @@ public class GreeterControllerTests {
 
     @Test
     public void testGreeterControllerGreetsKarolAtWrongHourParam() {
-        given(this.dayTimeClient.getDayTimeText("777")).willThrow(RuntimeException.class);//willReturn("morning");
+        given(this.dayTimeClient.getDayTimeText("777")).willThrow(RuntimeException.class);
         String actualGreeting = null;
         try {
             actualGreeting = this.greeterController.greetPerson("Karol","777");
