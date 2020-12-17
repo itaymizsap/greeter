@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 mkdir -p "greeter/jacoco/unit-tests"
 mkdir -p "greeter/jacoco/component-tests"
@@ -18,14 +18,18 @@ mkdir -p "greeter/jacoco/component-tests"
 
 docker-compose -f docker-compose-with_jacoco_agent.yml up --build --force-recreate -d
 
+# wait for services to become available
 sleep 20
 
 curl http://localhost:8070/greet/James
 
 printf '\n'
 
+# let greeter service shutdown gracefully
 docker stop -t 30 greeter || exit
 printf '\n'
+
+# Terminate rest of the services (day-time-resolver)
 docker-compose -f docker-compose-with_jacoco_agent.yml down
 
 cd greeter || exit

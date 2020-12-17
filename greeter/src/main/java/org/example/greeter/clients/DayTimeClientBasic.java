@@ -1,4 +1,4 @@
-package org.example.greeter;
+package org.example.greeter.clients;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

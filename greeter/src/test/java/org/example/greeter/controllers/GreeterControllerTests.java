@@ -1,5 +1,7 @@
-package org.example.greeter;
+package org.example.greeter.controllers;
 
+import org.example.greeter.clients.DayTimeClient;
+import org.example.greeter.controllers.GreeterController;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

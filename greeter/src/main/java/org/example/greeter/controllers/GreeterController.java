@@ -1,5 +1,6 @@
-package org.example.greeter;
+package org.example.greeter.controllers;
 
+import org.example.greeter.clients.DayTimeClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

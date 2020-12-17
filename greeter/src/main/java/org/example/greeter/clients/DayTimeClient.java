@@ -1,4 +1,4 @@
-package org.example.greeter;
+package org.example.greeter.clients;
 
 public interface DayTimeClient {
     String getDayTimeText();
