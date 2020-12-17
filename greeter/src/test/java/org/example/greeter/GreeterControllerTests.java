@@ -30,9 +30,9 @@ public class GreeterControllerTests {
         given(this.dayTimeClient.getDayTimeText()).willReturn("morning");
         String actualGreeting = this.greeterController.greetPerson("Karol");
         Assert.assertThat(actualGreeting, is("Good morning Karol"));
-        System.out.println("==================");
+        System.out.println("===================");
         System.out.println("Actual greeting as expected is: " + actualGreeting);
-        System.out.println("==================");
+        System.out.println("===================");
     }
 
     @Test
@@ -40,9 +40,9 @@ public class GreeterControllerTests {
         given(this.dayTimeClient.getDayTimeText("14")).willReturn("afternoon");
         String actualGreeting = this.greeterController.greetPerson("Karol", "14");
         Assert.assertThat(actualGreeting, is("Good afternoon Karol"));
-        System.out.println("==================");
+        System.out.println("===================");
         System.out.println("Actual greeting as expected is: " + actualGreeting);
-        System.out.println("==================");
+        System.out.println("===================");
     }
 
     @Test

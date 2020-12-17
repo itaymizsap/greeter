@@ -24,4 +24,5 @@ public class GreeterController {
     public String greetPerson(@PathVariable String person, @RequestParam(name = "hour") String hour) {
         return "Good " + dayTimeClient.getDayTimeText(hour) + " " + person;
     }
+
 }
