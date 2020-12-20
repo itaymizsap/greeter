@@ -1,6 +1,6 @@
 # greeter
 
-[![codecov](https://codecov.io/gh/itaymizsap/greeter/branch/main/graph/badge.svg?token=Q70LJR80MR)](https://codecov.io/gh/itaymizsap/greeter)
+[![Itay](https://codecov.io/gh/itaymizsap/greeter/branch/main/graph/badge.svg?token=Q70LJR80MR)](https://codecov.io/gh/itaymizsap/greeter)
 
 | Code Coverage | Rate |
 |---|---|
