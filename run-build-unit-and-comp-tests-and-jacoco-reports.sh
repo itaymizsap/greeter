@@ -49,10 +49,10 @@ java -jar jacoco/org.jacoco.cli-0.8.6-nodeps.jar report jacoco/component-tests/j
 --html jacoco/component-tests/html
 
 # shellcheck disable=SC2039
-bash <(curl -s https://codecov.io/bash) -t 276ee190-cce7-405f-99ab-8c71cf4acb89 -F unit-tests -f jacoco/unit-tests/report.xml
+bash <(curl -s https://codecov.io/bash) -t 276ee190-cce7-405f-99ab-8c71cf4acb89 -c -F unit-tests -f jacoco/unit-tests/report.xml
 
 # shellcheck disable=SC2039
-bash <(curl -s https://codecov.io/bash) -t 276ee190-cce7-405f-99ab-8c71cf4acb89 -F component-tests -f jacoco/component-tests/report.xml
+bash <(curl -s https://codecov.io/bash) -t 276ee190-cce7-405f-99ab-8c71cf4acb89 -c -F component-tests -f jacoco/component-tests/report.xml
 
 
 # MERGED UNIT and COMPONENT-TESTS Jacoco REPORT
