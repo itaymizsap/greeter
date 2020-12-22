@@ -16,7 +16,6 @@ application {
 
 repositories {
     mavenCentral()
-//    maven { url 'https://artifactory.imperva.com/repo' }
 }
 
 configurations {
@@ -45,7 +44,6 @@ task jacocoAgentOptionDockerfileENV(type: DefaultTask) {
 // COPY jacoco.exec dump out-to ${projectDir}/jacoco/unit-tests/jacoco.exec
 test {
     doLast {
-        println 'Hello World'
         def bytes = project.file(buildDir.path + '/jacoco/test.exec').bytes
         project.mkdir('jacoco/unit-tests')
         def file = project.file('jacoco/unit-tests/jacoco.exec')
